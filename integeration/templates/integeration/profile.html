@@ -1,0 +1,28 @@
+{% extends 'integeration/base.html' %}
+
+{% block content %}
+{% comment %} <div class="row">
+        <div class="already_message">
+            {% include 'integeration/message.html' %}
+        </div>
+    </div> {% endcomment %}
+
+<div class="mgg">
+  
+  {% if messages %}
+  {% for msg in messages %}
+  <small>{{msg}}</small>
+  
+  
+  {% endfor %}
+  
+  {% endif %}
+  </div>
+<h1>Hello Welcome to Pay 2 Help 🙏</h1>
+
+
+<form action="{% url 'payment' %}">
+  <input type="submit" value="Pay">
+</form>
+
+{% endblock content %}

@@ -1,0 +1,72 @@
+{% extends 'integeration/base.html' %} {% block content %}
+
+<div class="mgg">
+
+    {% if messages %} {% for msg in messages %}
+    <small> {{msg}}</small> {% endfor %} {% endif %}
+</div>
+
+
+<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="login-btn">Login</button>
+
+<div id="id01" class="modal">
+
+
+    <form class="modal-content animate" action={% url 'login_up' %} method="POST">
+        {% csrf_token %}
+        <div class="imgcontainer">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <img src="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/v1498292879/qp4ca2hqcghhhmgz3mhs.png" alt="Avatar" class="avatar">
+        </div>
+
+
+
+        <div class="container">
+
+
+
+
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="username" required>
+
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required> {% comment %} {% for field in form %}
+            <label for="{{field.auto_id}}" class="my_label">{{field.label}}</label>
+            <table>
+                <tr>
+                    {{field}}
+                </tr>
+            </table>
+            {% endfor %} {% endcomment %}
+
+            <input type="submit" value="Login">
+            <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+            <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
+    </form>
+
+</div>
+
+<script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+
+</html>
+{% endblock content %}

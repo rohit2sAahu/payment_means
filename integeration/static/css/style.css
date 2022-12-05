@@ -1,0 +1,39 @@
+body{
+    background-color: grey;
+}
+h2{
+    left: 50%;
+    /* background-color: red; */
+    text-align: center;
+}
+.login-btn{
+    background-color: purple;
+    margin: 5% 47%;
+}
+.my_label{
+    color: green;
+}
+.my_label:hover{
+    box-shadow: 3px 3px 2px 3px aqua;
+}
+
+a{
+    /* background-color: red; */
+    text-decoration: none;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 150%;
+    color: black;
+}
+a:hover{
+    color: aqua;
+}
+.alert{
+    border: 3px solid yellow;
+}
+.mgg{
+    /* background-color: red; */
+    font-size: 25px;
+    float: right;
+    block-size: auto;
+    color: yellow;
+}

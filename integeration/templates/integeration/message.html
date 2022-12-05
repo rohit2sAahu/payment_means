@@ -1,0 +1,39 @@
+{% if messages %} {% for message in messages %}
+
+<div class="alert alert-{{  message.tags }}" alert-dismissible fade show role="alert">
+    <strong>
+        
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+        Error: 
+        {% else %}
+        {{ message.tags | title }}
+
+        {% endif %}
+        {{ message }}
+
+
+
+    </strong>
+    <button type="button" class="close_menu" class="id202" aria-label="Close">
+          {% comment %} <span aria-hidden="true">&times;</span> {% endcomment %}
+        {% comment %} <span onclick="document.getElementById('id202').style.display='none'" class="close_menu" id="close_win" title="Close_Modal">&times;</span> {% endcomment %}
+        </button>
+</div>
+<script>
+// Get the modal
+var modal = document.getElementById('id202');
+var value= document.getElementById('close_win');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+    if (event.target == value) {
+        value.style.display = "none";
+    }
+}
+</script>
+
+
+{% endfor %} {% endif %}

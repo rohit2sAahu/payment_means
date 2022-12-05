@@ -1,0 +1,81 @@
+ {% extends 'integeration/paymentBase.html' %} {% load static %} {% block content %}
+
+<h1>Welcome <span> {{uname}}</span> in Payment Page </h1>
+
+<div class="col-6 mx-auto">
+    <div class="text-center">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1NVDXEm2NGrkcVYq1rmoWvsdqqGTM_ltJng&usqp=CAU" alt="Donation" class="img-fluid img-responsive img-def" style="border:30px">
+    </div>
+
+    <form action="{% url 'payment' %}" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Name</label>
+            <input type="name" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Amount</label>
+            <input type="amount" name="amount" class="form-control" id="exampleInputPassword1">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+
+
+</div>
+
+
+
+{% if payment %}
+<div class="text-center mx-auto">
+    <form action="{% url 'success' %}" method="POST">
+        {% csrf_token %}
+        <button id="rzp-button1">Pay</button>
+
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+        <script>
+            var options = {
+                "key": "rzp_test_ctHeJCHQBtAKoT", // Enter the Key ID generated from the Dashboard
+                "amount": "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Payment 2 Help Foundation",
+                "description": "Test Transaction",
+                "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1NVDXEm2NGrkcVYq1rmoWvsdqqGTM_ltJng&usqp=CAU",
+                "order_id": "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function(response) {
+                    alert(response.razorpay_payment_id)
+                },
+                "prefill": {
+                    "name": "Rohit sahu",
+                    "email": "rohitkrsahu3d@gmail.com",
+                    "contact": "9549150309"
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.on('payment.failed', function(response) {
+
+                alert(response.error.reason);
+            });
+            document.getElementById('rzp-button1').onclick = function(e) {
+                rzp1.open();
+
+                e.preventDefault();
+            }
+        </script>
+
+    </form>
+
+</div>
+
+
+
+
+
+{% endif %} {% endblock content %}
